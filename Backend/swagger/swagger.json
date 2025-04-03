@@ -1,0 +1,1938 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Admin API Documentation",
+    "version": "1.0.0",
+    "description": "This is the API documentation for the Admin module."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "Development server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Admin",
+      "description": "Admin management"
+    },
+    {
+      "name": "Donation",
+      "description": "Donation management"
+    },
+    {
+      "name": "Donor",
+      "description": "Donor management"
+    },
+    {
+      "name": "Entitie",
+      "description": "Entitie management"
+    },
+    {
+      "name": "Login",
+      "description": "User login management"
+    },
+    {
+      "name": "Admin_API",
+      "description": "API routes for admin"
+    },
+    {
+      "name": "Donation_API",
+      "description": "API routes for admin"
+    },
+    {
+      "name": "Donor_API",
+      "description": "API routes for donation"
+    },
+    {
+      "name": "Entidade_API",
+      "description": "API routes for donation"
+    }
+  ],
+  "paths": {
+    "/admins": {
+      "get": {
+        "summary": "Get all admins",
+        "tags": ["Admin"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all admins"
+          }
+        }
+      }
+    },
+    "/admins/add": {
+      "get": {
+        "summary": "Render add admin page",
+        "tags": ["Admin"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Render add admin page"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new admin",
+        "tags": ["Admin"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "psw": {
+                    "type": "string"
+                  },
+                  "pswrepeat": {
+                    "type": "string"
+                  },
+                  "tipo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Admin created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/admins/search": {
+      "post": {
+        "summary": "Search admins by email",
+        "tags": ["Admin"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "searchTerm": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Search results"
+          }
+        }
+      }
+    },
+    "/admins/{id}/delete": {
+      "post": {
+        "summary": "Delete an admin by ID",
+        "tags": ["Admin"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Admin ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Admin deleted successfully"
+          },
+          "404": {
+            "description": "Admin not found"
+          }
+        }
+      }
+    },
+    "/admins/{id}/edit": {
+      "get": {
+        "summary": "Render edit admin page",
+        "tags": ["Admin"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Admin ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Render edit admin page"
+          },
+          "404": {
+            "description": "Admin not found"
+          }
+        }
+      },
+      "post": {
+        "summary": "Update an admin by ID",
+        "tags": ["Admin"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Admin ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "psw": {
+                    "type": "string"
+                  },
+                  "pswrepeat": {
+                    "type": "string"
+                  },
+                  "tipo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Admin updated successfully"
+          },
+          "404": {
+            "description": "Admin not found"
+          }
+        }
+      }
+    },
+    "/admins/{id}/view": {
+      "get": {
+        "summary": "Get an admin by ID",
+        "tags": ["Admin"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Admin ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Admin details"
+          },
+          "404": {
+            "description": "Admin not found"
+          }
+        }
+      }
+    },
+    "/doacao": {
+      "get": {
+        "summary": "Render donation page",
+        "tags": ["Donation"],
+        "responses": {
+          "200": {
+            "description": "Render donation page"
+          }
+        }
+      }
+    },
+    "/doacao/search": {
+      "post": {
+        "summary": "Search donors by email",
+        "tags": ["Donation"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "searchTerm": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Search results"
+          }
+        }
+      }
+    },
+    "/doacao/list": {
+      "get": {
+        "summary": "List all donations",
+        "tags": ["Donation"],
+        "responses": {
+          "200": {
+            "description": "List of all donations"
+          }
+        }
+      }
+    },
+    "/doacao/create": {
+      "get": {
+        "summary": "Render create donation page",
+        "tags": ["Donation"],
+        "responses": {
+          "200": {
+            "description": "Render create donation page"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new donation",
+        "tags": ["Donation"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "donorEmail": {
+                    "type": "string"
+                  },
+                  "entity": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "donationType0": {
+                    "type": "string"
+                  },
+                  "moneyQuantity0": {
+                    "type": "number"
+                  },
+                  "clothWeight0": {
+                    "type": "number"
+                  },
+                  "clothColor0": {
+                    "type": "string"
+                  },
+                  "clothType0": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Donation created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/doacao/delete/{id}": {
+      "post": {
+        "summary": "Delete a donation by ID",
+        "tags": ["Donation"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Donation ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Donation deleted successfully"
+          },
+          "404": {
+            "description": "Donation not found"
+          }
+        }
+      }
+    },
+    "/donor": {
+      "get": {
+        "summary": "Get all donors",
+        "tags": ["Donor"],
+        "responses": {
+          "200": {
+            "description": "List of all donors"
+          }
+        }
+      }
+    },
+    "/donor/{email}": {
+      "get": {
+        "summary": "Get donor details by email",
+        "tags": ["Donor"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "email",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Donor email"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Donor details"
+          }
+        }
+      }
+    },
+    "/donor/{email}/delete": {
+      "post": {
+        "summary": "Delete a donor by email",
+        "tags": ["Donor"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "email",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Donor email"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Donor deleted successfully"
+          },
+          "404": {
+            "description": "Donor not found"
+          }
+        }
+      }
+    },
+    "/donor/edit/{email}": {
+      "post": {
+        "summary": "Edit donor details by email",
+        "tags": ["Donor"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "email",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Donor email"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "address": {
+                    "type": "string"
+                  },
+                  "age": {
+                    "type": "number"
+                  },
+                  "phoneNumber": {
+                    "type": "string"
+                  },
+                  "donationHistory": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Donor updated successfully"
+          },
+          "404": {
+            "description": "Donor not found"
+          }
+        }
+      }
+    },
+    "/entities": {
+      "get": {
+        "summary": "Retrieve all entities",
+        "tags": ["Entitie"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all entities"
+          }
+        }
+      }
+    },
+    "/entities/add": {
+      "get": {
+        "summary": "Render add entity page",
+        "tags": ["Entitie"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Render add entity page"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new entity",
+        "tags": ["Entitie"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "distrito": {
+                    "type": "string"
+                  },
+                  "image": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "psw": {
+                    "type": "string"
+                  },
+                  "pswrepeat": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name", "email", "psw", "pswrepeat"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Entity created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/entities/search": {
+      "post": {
+        "summary": "Search entities",
+        "tags": ["Entitie"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "searchTerm": {
+                    "type": "string"
+                  }
+                },
+                "required": ["searchTerm"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Search results"
+          }
+        }
+      }
+    },
+    "/entities/{id}/delete": {
+      "post": {
+        "summary": "Delete an entity by ID",
+        "tags": ["Entitie"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Entity ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entity deleted successfully"
+          },
+          "404": {
+            "description": "Entity not found"
+          }
+        }
+      }
+    },
+    "/entities/{id}/edit": {
+      "get": {
+        "summary": "Render edit entity page",
+        "tags": ["Entitie"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Entity ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Render edit entity page"
+          },
+          "404": {
+            "description": "Entity not found"
+          }
+        }
+      },
+      "post": {
+        "summary": "Update an entity by ID",
+        "tags": ["Entitie"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Entity ID"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "distrito": {
+                    "type": "string"
+                  },
+                  "image": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Entity updated successfully"
+          },
+          "404": {
+            "description": "Entity not found"
+          }
+        }
+      }
+    },
+    "/entities/{id}/view": {
+      "get": {
+        "summary": "View an entity by ID",
+        "tags": ["Entitie"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Entity ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entity details"
+          },
+          "404": {
+            "description": "Entity not found"
+          }
+        }
+      }
+    },
+    "/entities/all": {
+      "get": {
+        "summary": "Get all entities",
+        "tags": ["Entitie"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all entities"
+          }
+        }
+      }
+    },
+    "/login": {
+      "get": {
+        "summary": "Render login page",
+        "tags": ["Login"],
+        "responses": {
+          "200": {
+            "description": "Login page rendered"
+          }
+        }
+      },
+      "post": {
+        "summary": "User login",
+        "tags": ["Login"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": ["email", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/login/json": {
+      "post": {
+        "summary": "User login (JSON response)",
+        "tags": ["Login"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": ["email", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful (JSON response)"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/logout": {
+      "get": {
+        "summary": "User logout",
+        "tags": ["Login"],
+        "responses": {
+          "200": {
+            "description": "Logout successful"
+          }
+        }
+      }
+    },
+    "/api/admin/profile": {
+      "get": {
+        "summary": "Get the profile of the logged-in admin",
+        "tags": ["Admin_API"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Admin profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "tipo": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/admin/profile/update": {
+      "post": {
+        "summary": "Update the profile of the admin",
+        "tags": ["Admin_API"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "psw": {
+                    "type": "string"
+                  },
+                  "pswrepeat": {
+                    "type": "string"
+                  },
+                  "tipo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Profile updated successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/admin/average-kg-per-donation": {
+      "get": {
+        "summary": "Get the average kilograms per donation",
+        "tags": ["Admin_API"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Average kilograms per donation"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/admin/donations-per-district": {
+      "get": {
+        "summary": "Get the number of donations per district",
+        "tags": ["Admin_API"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Number of donations per district"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/admin/clothing-types-pie": {
+      "get": {
+        "summary": "Get the distribution of clothing types",
+        "tags": ["Admin_API"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Distribution of clothing types"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/donations/create-paypal-payment": {
+      "post": {
+        "summary": "Create a PayPal payment",
+        "tags": ["Donation_API"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "number"
+                  }
+                },
+                "required": ["amount"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "PayPal payment created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "links": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "href": {
+                            "type": "string"
+                          },
+                          "rel": {
+                            "type": "string"
+                          },
+                          "method": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error creating PayPal payment"
+          }
+        }
+      }
+    },
+    "/api/donations/execute-paypal-payment": {
+      "post": {
+        "summary": "Execute a PayPal payment",
+        "tags": ["Donation_API"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "paymentId": {
+                    "type": "string"
+                  }
+                },
+                "required": ["paymentId"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "PayPal payment executed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error capturing PayPal payment"
+          }
+        }
+      }
+    },
+    "/api/donations/create-doacao": {
+      "post": {
+        "summary": "Create a donation",
+        "tags": ["Donation_API"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "donorEmail": {
+                    "type": "string"
+                  },
+                  "entity": {
+                    "type": "string"
+                  },
+                  "paymentId": {
+                    "type": "string"
+                  },
+                  "payerId": {
+                    "type": "string"
+                  },
+                  "amount": {
+                    "type": "number"
+                  },
+                  "clothDonations": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "color": {
+                          "type": "string"
+                        },
+                        "type": {
+                          "type": "string"
+                        },
+                        "weight": {
+                          "type": "number"
+                        },
+                        "state": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": ["donorEmail", "entity"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Donation created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/donations/list-doacoes": {
+      "get": {
+        "summary": "List all donations",
+        "tags": ["Donation_API"],
+        "responses": {
+          "200": {
+            "description": "List of all donations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "donations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "_id": {
+                            "type": "string"
+                          },
+                          "donorEmail": {
+                            "type": "string"
+                          },
+                          "entityName": {
+                            "type": "string"
+                          },
+                          "donations": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "type": {
+                                  "type": "string"
+                                },
+                                "kg": {
+                                  "type": "number"
+                                },
+                                "color": {
+                                  "type": "string"
+                                },
+                                "clothType": {
+                                  "type": "string"
+                                },
+                                "state": {
+                                  "type": "string"
+                                },
+                                "points": {
+                                  "type": "number"
+                                },
+                                "quantity": {
+                                  "type": "number"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error listing donations"
+          }
+        }
+      }
+    },
+    "/api/donations/update-state/{entityName}/{index}": {
+      "patch": {
+        "summary": "Update the state of a donation",
+        "tags": ["Donation_API"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entityName",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name of the entity"
+          },
+          {
+            "in": "path",
+            "name": "index",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Index of the donation"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "state": {
+                    "type": "string"
+                  }
+                },
+                "required": ["state"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Donation state updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Entity or donation not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/donor/profile": {
+      "get": {
+        "summary": "Get donor profile",
+        "tags": ["Donor_API"],
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Donor profile retrieved successfully" },
+          "401": { "description": "Unauthorized" },
+          "404": { "description": "Donor not found" },
+          "500": { "description": "Internal server error" }
+        }
+      },
+      "post": {
+        "summary": "Update donor profile",
+        "tags": ["Donor_API"],
+        "security": [{ "BearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "lname": { "type": "string" },
+                  "email": { "type": "string" },
+                  "psw": { "type": "string" },
+                  "pswrepeat": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Donor updated successfully" },
+          "400": { "description": "Bad request" },
+          "401": { "description": "Unauthorized" },
+          "404": { "description": "Donor not found" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    },
+    "/api/donor/profile/add": {
+      "post": {
+        "summary": "Create a new donor",
+        "tags": ["Donor_API"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "lname": { "type": "string" },
+                  "email": { "type": "string" },
+                  "psw": { "type": "string" },
+                  "pswrepeat": { "type": "string" },
+                  "age": { "type": "integer" },
+                  "tipo": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Donor created successfully" },
+          "400": { "description": "Bad request" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    },
+    "/api/donor/check-email": {
+      "get": {
+        "summary": "Check if email exists",
+        "tags": ["Donor_API"],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Email check result" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    },
+    "/api/donor/profile/ndonations": {
+      "get": {
+        "summary": "Get donation count",
+        "tags": ["Donor_API"],
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Donation count retrieved successfully" },
+          "401": { "description": "Unauthorized" },
+          "404": { "description": "No donations found" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    },
+    "/api/donor/donations": {
+      "get": {
+        "summary": "Get donations by email",
+        "tags": ["Donor_API"],
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Donations retrieved successfully" },
+          "400": { "description": "Bad request" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    },
+    "/api/donor/pointsEvolution": {
+      "get": {
+        "summary": "Get points evolution",
+        "tags": ["Donor_API"],
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": { "description": "Points evolution retrieved successfully" },
+          "400": { "description": "Bad request" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    },
+    "/api/donor/redeemCoupon": {
+      "post": {
+        "summary": "Redeem coupon",
+        "tags": ["Donor_API"],
+        "security": [{ "BearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "couponValue": { "type": "integer" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Coupon redeemed successfully" },
+          "400": { "description": "Bad request" },
+          "401": { "description": "Unauthorized" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    },
+    "/api/entidade/profile/add": {
+      "post": {
+        "summary": "Create a new entitie",
+        "tags": ["Entidade_API"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "distrito": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  },
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description",
+                  "distrito",
+                  "email",
+                  "password",
+                  "image"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Entitie created successfully"
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/entidade/profile": {
+      "get": {
+        "summary": "Get entitie profile",
+        "tags": ["Entidade_API"],
+        "responses": {
+          "200": {
+            "description": "Entitie profile retrieved successfully"
+          },
+          "401": {
+            "description": "No token provided"
+          },
+          "404": {
+            "description": "Entitie not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/entidade/profile/update": {
+      "post": {
+        "summary": "Update an entitie",
+        "tags": ["Entidade_API"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "psw": {
+                    "type": "string",
+                    "format": "password"
+                  },
+                  "pswrepeat": {
+                    "type": "string",
+                    "format": "password"
+                  },
+                  "image": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "distrito": {
+                    "type": "string"
+                  }
+                },
+                "required": ["name", "email"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Entitie updated successfully"
+          },
+          "401": {
+            "description": "No token provided"
+          },
+          "404": {
+            "description": "Entitie not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/entidade/pending-entities": {
+      "get": {
+        "summary": "Get pending entities",
+        "tags": ["Entidade_API"],
+        "responses": {
+          "200": {
+            "description": "List of pending entities"
+          },
+          "404": {
+            "description": "No pending entities found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/entidade/accept/{id}": {
+      "post": {
+        "summary": "Accept a pending entitie",
+        "tags": ["Entidade_API"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Entitie ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entitie accepted successfully"
+          },
+          "404": {
+            "description": "Pending entitie not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/entidade/reject/{id}": {
+      "post": {
+        "summary": "Reject a pending entitie",
+        "tags": ["Entidade_API"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Entitie ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entitie rejected and removed successfully"
+          },
+          "404": {
+            "description": "Pending entitie not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/entidade/donations": {
+      "get": {
+        "summary": "List all donations for the entitie",
+        "tags": ["Entidade_API"],
+        "responses": {
+          "200": {
+            "description": "List of donations"
+          },
+          "404": {
+            "description": "No donations found for this entitie"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/entidade/all": {
+      "get": {
+        "summary": "Get all entities",
+        "tags": ["Entidade_API"],
+        "responses": {
+          "200": {
+            "description": "List of all entities"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/entidade/{id}": {
+      "get": {
+        "summary": "Get an entitie by ID",
+        "tags": ["Entidade_API"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Entitie ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entitie details"
+          },
+          "404": {
+            "description": "Entitie not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "summary": "User login",
+        "tags": ["Login_API"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "user@example.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "userpassword"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Login successful"
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Incorrect password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Incorrect password"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Email not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Email not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/role": {
+      "get": {
+        "summary": "Get user role",
+        "tags": ["Login_API"],
+        "responses": {
+          "200": {
+            "description": "Role retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "role": {
+                      "type": "string",
+                      "example": "admin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "No token provided or invalid token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "No token provided"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Email not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Email not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
