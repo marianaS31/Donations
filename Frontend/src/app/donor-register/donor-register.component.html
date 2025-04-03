@@ -1,0 +1,56 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <h2>Criar Doador</h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="donorForm" class="needs-validation" novalidate>
+    <div class="form-group">
+      <label for="name"> Nome</label>
+      <input id="name" formControlName="name" class="form-control" [ngClass]="{'is-invalid': donorForm.controls['name'].invalid && donorForm.controls['name'].touched}" />
+      <div *ngIf="donorForm.controls['name'].invalid && donorForm.controls['name'].touched" class="invalid-feedback">
+        O primeiro nome é obrigatorio e tem de ter pelo menos 3 caracteres.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="lname">Sobrenome </label>
+      <input id="lname" formControlName="lname" class="form-control" [ngClass]="{'is-invalid': donorForm.controls['lname'].invalid && donorForm.controls['lname'].touched}" />
+      <div *ngIf="donorForm.controls['lname'].invalid && donorForm.controls['lname'].touched" class="invalid-feedback">
+        O sobrenome é obrigatorio e tem de ter pelo menos 3 caracteres.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" formControlName="email" class="form-control" [ngClass]="{'is-invalid': donorForm.controls['email'].invalid && donorForm.controls['email'].touched}" />
+      <div *ngIf="donorForm.controls['email'].invalid && donorForm.controls['email'].touched" class="invalid-feedback">
+        Por favor introduza um email valido.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="age">Idade</label>
+      <input id="age" formControlName="age" type="number" class="form-control" [ngClass]="{'is-invalid': donorForm.controls['age'].invalid && donorForm.controls['age'].touched}" />
+      <div *ngIf="donorForm.controls['age'].invalid && donorForm.controls['age'].touched" class="invalid-feedback">
+        A idade é obrigatoria e tem de ter pelo menos 18 anos.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="psw">Password</label>
+      <input id="psw" formControlName="psw" type="password" class="form-control" [ngClass]="{'is-invalid': donorForm.controls['psw'].invalid && donorForm.controls['psw'].touched}" />
+      <div *ngIf="donorForm.controls['psw'].invalid && donorForm.controls['psw'].touched" class="invalid-feedback">
+        Password é obrigatorio e tem de ter pelo menos 5 caracteres.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="pswrepeat">Repetir Password</label>
+      <input id="pswrepeat" formControlName="pswrepeat" type="password" class="form-control" [ngClass]="{'is-invalid': donorForm.controls['pswrepeat'].invalid && donorForm.controls['pswrepeat'].touched}" />
+      <div *ngIf="donorForm.controls['pswrepeat'].invalid && donorForm.controls['pswrepeat'].touched" class="invalid-feedback">
+        Por favor repita a password.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Registar</button>
+  </form>
+
+  <div *ngIf="errorMessages.length > 0" class="alert alert-danger mt-3">
+    <p *ngFor="let message of errorMessages">{{ message }}</p>
+  </div>
+  <div *ngIf="successMessage" class="alert alert-success mt-3">
+    <p>{{ successMessage }}</p>
+  </div>
+</div>

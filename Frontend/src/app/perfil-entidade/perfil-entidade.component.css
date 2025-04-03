@@ -1,0 +1,69 @@
+.perfil-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f9;
+    padding: 20px;
+  }
+  
+  .perfil-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 600px;
+    width: 100%;
+    margin: 20px;
+  }
+  
+  .perfil-header {
+    position: relative;
+    text-align: center;
+    background-color: #007bff;
+    color: #fff;
+    padding: 100px;
+  }
+  
+  .perfil-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    margin-top: -75px;
+    background-color: #f4f4f9;
+  }
+  
+  .perfil-name {
+    margin-top: 10px;
+    font-size: 24px;
+  }
+  
+  .perfil-body {
+    padding: 20px;
+  }
+  
+  .perfil-body h2 {
+    margin-top: 0;
+    color: #007bff;
+  }
+  
+  .perfil-description,
+  .perfil-distrito {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 24px;
+    color: #007bff;
+  }
+  
+  .error {
+    text-align: center;
+    font-size: 24px;
+    color: #ff0000;
+  }
+  

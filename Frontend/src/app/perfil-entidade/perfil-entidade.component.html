@@ -1,0 +1,18 @@
+<app-navbar></app-navbar>
+<div class="perfil-container" *ngIf="!loading && !error && entidade">
+  <div class="perfil-card">
+    <div class="perfil-header">
+      <img class="perfil-image" [src]="getImageUrl(entidade.image)" alt="{{ entidade.name }}">
+      <h1 class="perfil-name">{{ entidade.name }}</h1>
+    </div>
+    <div class="perfil-body">
+      <h2>Descrição</h2>
+      <p class="perfil-description">{{ entidade.description }}</p>
+      <h2>Distrito</h2>
+      <p class="perfil-distrito">{{ entidade.distrito }}</p>
+      <!-- Adicione mais informações conforme necessário -->
+    </div>
+  </div>
+</div>
+<div *ngIf="loading" class="loading">Carregando...</div>
+<div *ngIf="error" class="error">{{ error }}</div>

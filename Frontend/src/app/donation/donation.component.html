@@ -1,0 +1,188 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <h2 class="mb-4">Doação</h2>
+  <form (ngSubmit)="onSubmit(donationForm)" #donationForm="ngForm" novalidate>
+    <div class="form-group">
+      <label for="donorEmail">Email Doador:</label>
+      <input
+        type="email"
+        id="donorEmail"
+        class="form-control"
+        [(ngModel)]="donorEmail"
+        name="donorEmail"
+        required
+      />
+      <div
+        *ngIf="
+          donationForm.submitted && !donationForm.controls['donorEmail'].valid
+        "
+        class="text-danger mt-2"
+      >
+        Por favor introduza um email valido.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="entity">Entidade:</label>
+      <input
+        type="text"
+        id="entity"
+        class="form-control"
+        [(ngModel)]="entity"
+        name="entity"
+        required
+      />
+      <div
+        *ngIf="donationForm.submitted && !donationForm.controls['entity'].valid"
+        class="text-danger mt-2"
+      >
+        Por favor introduza uma entidade valida.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="donationType">Tipo de Doação:</label>
+      <select
+        class="form-control"
+        [(ngModel)]="donationType"
+        name="donationType"
+        (change)="onDonationTypeChange()"
+        required
+      >
+        <option value="money">Dinheiro</option>
+        <option value="cloth">Roupa</option>
+      </select>
+    </div>
+
+    <div *ngIf="donationType === 'money'" class="form-group">
+      <label for="amount">Quantidade:</label>
+      <input
+        type="number"
+        id="amount"
+        class="form-control"
+        [(ngModel)]="amount"
+        name="amount"
+        required
+        min="1"
+      />
+      <div
+        *ngIf="donationForm.submitted && !donationForm.controls['amount'].valid"
+        class="text-danger mt-2"
+      >
+        Por favor introduza pelo menos a quantidade de 1.
+      </div>
+    </div>
+
+    <div *ngIf="donationType === 'cloth'">
+      <div class="form-group">
+        <label for="clothState">Estado:</label>
+        <select
+          id="clothState"
+          class="form-control"
+          [(ngModel)]="state"
+          name="clothState"
+          required
+        >
+          <option value="Entregue diretamente">Entregue diretamente</option>
+          <option value="Ponto de recolha">Ponto de recolha</option>
+        </select>
+      </div>
+      <div id="clothDonations">
+        <div
+          *ngFor="let clothDonation of clothDonations; let i = index"
+          class="cloth-donation mb-3"
+        >
+          <h4>Doação de Roupa {{ i + 1 }}</h4>
+          <div class="form-group">
+            <label for="clothWeight{{ i }}">Peso:</label>
+            <input
+              type="number"
+              id="clothWeight{{ i }}"
+              class="form-control"
+              [(ngModel)]="clothDonation.weight"
+              name="clothWeight{{ i }}"
+              required
+              min="1"
+            />
+            <div
+              *ngIf="
+                donationForm.submitted &&
+                !donationForm.controls['clothWeight' + i].valid
+              "
+              class="text-danger mt-2"
+            >
+              Por favor introduza o peso minimo de 1.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="clothColor{{ i }}">Cor:</label>
+            <input
+              type="text"
+              id="clothColor{{ i }}"
+              class="form-control"
+              [(ngModel)]="clothDonation.color"
+              name="clothColor{{ i }}"
+              required
+              pattern=".{4,}"
+            />
+            <div
+              *ngIf="
+                donationForm.submitted &&
+                !donationForm.controls['clothColor' + i].valid
+              "
+              class="text-danger mt-2"
+            >
+              Por favor introduza uma cor com no minino 4 caracteres.
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="clothType{{ i }}">Tipo:</label>
+            <input
+              type="text"
+              id="clothType{{ i }}"
+              class="form-control"
+              [(ngModel)]="clothDonation.type"
+              name="clothType{{ i }}"
+              required
+              pattern=".{4,}"
+            />
+            <div
+              *ngIf="
+                donationForm.submitted &&
+                !donationForm.controls['clothType' + i].valid
+              "
+              class="text-danger mt-2"
+            >
+            Por favor introduza uma tipo com no minino 4 caracteres.
+            </div>
+          </div>
+          <button
+            type="button"
+            class="btn btn-danger mt-2"
+            (click)="removeClothDonation(i)"
+          >
+            Remover
+          </button>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="btn btn-secondary mt-2"
+        (click)="addClothDonation()"
+      >
+        Adicionar doação de roupa
+      </button>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary mt-3"
+      *ngIf="donationType === 'cloth'"
+    >
+      Doar
+    </button>
+  </form>
+  <div
+    id="paypal-button-container"
+    class="mt-4"
+    *ngIf="donationType === 'money'"
+  ></div>
+</div>

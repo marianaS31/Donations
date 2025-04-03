@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+
+<div class="search-bar-container">
+  <input 
+    type="text" 
+    class="search-bar" 
+    placeholder="Pesquisar por nome ou distrito" 
+    [(ngModel)]="searchText" 
+    (ngModelChange)="filterEntidades()"
+  >
+</div>
+
+<div class="entidade-grid-container">
+  <div class="entidade-grid">
+    <div *ngFor="let entidade of filteredEntidades" class="entidade-card">
+      <a [routerLink]="['/entidades', entidade._id]"> <!-- Ajuste para a rota correta -->
+        <img 
+          class="entidade-image" 
+          *ngIf="entidade" 
+          [src]="getImageUrl(entidade.image)" 
+          alt="{{ entidade.name }}"
+        >
+        <div class="entidade-details">
+          <h3 class="entidade-name">{{ entidade.name }}</h3>
+          <p class="entidade-description">{{ entidade.description }}</p>
+          <p class="entidade-distrito">{{ entidade.distrito }}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

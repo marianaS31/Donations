@@ -1,0 +1,35 @@
+/* Custom Styles */
+.container {
+  max-width: 700px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form .form-group label {
+  font-weight: bold;
+}
+
+form .form-group .text-danger {
+  margin-top: 5px;
+}
+
+form .cloth-donation {
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  padding: 15px;
+  background-color: #f8f9fa;
+}
+
+form .cloth-donation h4 {
+  margin-bottom: 15px;
+}
+
+form button[type="submit"] {
+  width: 100%;
+}
+
+button.btn-secondary {
+  width: 100%;
+}

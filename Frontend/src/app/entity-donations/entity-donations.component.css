@@ -1,0 +1,37 @@
+.container {
+  max-width: 1200px;
+}
+
+form .form-row {
+  justify-content: center;
+}
+
+form .form-control {
+  border-radius: 0;
+}
+
+form .btn {
+  border-radius: 0;
+}
+
+.table-responsive {
+  margin-top: 20px;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+thead.thead-dark th {
+  background-color: #343a40;
+  color: #fff;
+}
+
+.list-group-item {
+  padding: 10px;
+  border: none;
+}
+
+.list-group-item strong {
+  color: #343a40;
+}

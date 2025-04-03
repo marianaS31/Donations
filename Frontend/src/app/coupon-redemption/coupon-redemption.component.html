@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<div class="coupon-redemption">
+  <h2>Resgatar Cupom</h2>
+  <label for="couponValue">Valor do Cupom (€):</label>
+  <select id="couponValue" [(ngModel)]="couponValue">
+    <option value="1">1</option>
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+  </select>
+  <button (click)="redeemCoupon()">Resgatar</button>
+  <p *ngIf="message">{{ message }}</p>
+</div>

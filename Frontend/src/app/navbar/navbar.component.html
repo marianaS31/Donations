@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">Roupa Solidaria</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      aria-label="Toggle navigation"
+      (click)="toggleNavbar()"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" [ngClass]="{ show: isNavbarOpen }">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/entidades" routerLinkActive="active">Entidades</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <ng-container *ngIf="!isLoggedIn">
+          <li class="nav-item">
+            <a class="nav-link btn btn-primary text-black" routerLink="/login" routerLinkActive="active">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-primary text-black" routerLink="/profile/register" routerLinkActive="active">Criar Conta doador</a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="!isLoggedIn" >
+          <li class="nav-item">
+            <a class="nav-link btn btn-primary text-black" routerLink="/entidade/register" routerLinkActive="active">Criar Conta entidade</a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="isLoggedIn && role === 'admin'" >
+          <li class="nav-item">
+            <a class="nav-link btn btn-primary text-black" routerLink="/admin-dashboard" routerLinkActive="active">Admin Dashboard</a>
+          </li>
+        </ng-container>
+        <ng-container *ngIf="isLoggedIn">
+          <li class="nav-item">
+            <a class="nav-link btn btn-primary text-black" routerLink="/profile" routerLinkActive="active">Perfil</a>
+          </li>
+          <li class="nav-item" *ngIf="role === 'donor'">
+            <a class="nav-link btn btn-primary text-black" routerLink="/coupon-redemption" routerLinkActive="active">Trocar Pontos</a>
+          </li>
+          <li class="nav-item" *ngIf="role === 'donor'">
+            <a class="nav-link btn btn-primary text-black" routerLink="/create-donation" routerLinkActive="active">Criar Doação</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-primary text-black" (click)="logout()">Logout</a>
+          </li>
+          <li class="nav-item" *ngIf="role === 'entitie'">
+            <a class="nav-link" routerLink="/entity-donations" routerLinkActive="active">Ver Doações</a>
+          </li>
+          <li class="nav-item" *ngIf="role === 'admin'">
+            <a class="nav-link" routerLink="/donation-list" routerLinkActive="active">Doações</a>
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</nav>

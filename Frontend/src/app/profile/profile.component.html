@@ -1,0 +1,101 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <div *ngIf="role === 'donor'" class="card">
+    <div class="card-header">
+      <h1 class="card-title">Perfil Doador</h1>
+    </div>
+    <div class="card-body">
+      <p class="card-text"><strong>Email:</strong> {{ donor?.email }}</p>
+      <p class="card-text"><strong>Nome:</strong> {{ donor?.name }}</p>
+      <p class="card-text"><strong>Pontos:</strong> {{ donor?.points }}</p>
+      <button class="btn btn-primary" (click)="navigateToEditProfile()">
+        Editar Perfil
+      </button>
+      <button
+        class="btn btn-danger ml-2"
+        (profileUpdated)="handleProfileUpdated()"
+        (cancelEdit)="toggleEditing()"
+      >
+        Apagar conta
+      </button>
+    </div>
+    <div class="card mt-3">
+      <div class="card-header">
+        <h2 class="card-title">Doações</h2>
+      </div>
+      <div class="card-body">
+        <!-- Search bar -->
+        <input
+          type="text"
+          class="form-control mb-3"
+          placeholder="Pesquisar por entidade, tipo ou data"
+          [(ngModel)]="searchQuery"
+          (input)="filterDonations()"
+        />
+        <div *ngIf="filteredDonations.length === 0">
+          <p>Sem doações para visualizar.</p>
+        </div>
+        <div
+          *ngFor="let donation of filteredDonations"
+          class="donation-card mb-3 p-3 border rounded"
+        >
+          <p><strong>Entidade:</strong> {{ donation.entity }}</p>
+          <p><strong>Pontos:</strong> {{ donation.points }}</p>
+          <p><strong>Tipo:</strong> {{ donation.type }}</p>
+          <p><strong>Quantidade:</strong> {{ donation.quantity }}</p>
+          <p *ngIf="donation.kg"><strong>KG:</strong> {{ donation.kg }}</p>
+          <p *ngIf="donation.color">
+            <strong>Cor:</strong> {{ donation.color }}
+          </p>
+          <p *ngIf="donation.clothType">
+            <strong>Tipo de roupa:</strong> {{ donation.clothType }}
+          </p>
+          <p><strong>Data:</strong> {{ donation.date | date : "short" }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <div class="card-header">
+        <h2 class="card-title">Evolução de Pontos</h2>
+      </div>
+      <div class="card-body">
+        <canvas id="pointsEvolutionChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="role === 'admin'" class="card">
+    <div class="card-header">
+      <h1 class="card-title">Perfil Admin</h1>
+    </div>
+    <div class="card-body">
+      <div *ngIf="!editing">
+        <p class="card-text"><strong>Email:</strong> {{ admin.email }}</p>
+        <p class="card-text"><strong>Nome:</strong> {{ admin.name }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="role === 'entitie'" class="card">
+    <div class="card-header">
+      <h1 class="card-title">Perfil da entidade</h1>
+    </div>
+    <div class="card-body">
+      <div *ngIf="!editing">
+        <p class="card-text"><strong>Email:</strong> {{ entitie.email }}</p>
+        <p class="card-text"><strong>Nome:</strong> {{ entitie.name }}</p>
+        <p class="card-text">
+          <strong>Descrição:</strong> {{ entitie.description }}
+        </p>
+        <p class="card-text">
+          <strong>Distrito:</strong> {{ entitie.district }}
+        </p>
+        <img [src]="entitie.image" alt="Entity Image" *ngIf="entitie.image" />
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-info" *ngIf="!role">
+    <p>A carregar...</p>
+  </div>
+</div>

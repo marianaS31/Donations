@@ -1,0 +1,55 @@
+/* Estilo para o formulário */
+form {
+    max-width: 650px;
+    margin: 20px auto; /* Centraliza e adiciona margem superior e inferior */
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5%;
+  }
+  
+  /* Estilo para cada grupo de campos */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Estilo para os rótulos */
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Estilo para inputs e textarea */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  /* Estilo para o botão */
+  button[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  /* Estilo para mensagens de erro */
+  .error-message {
+    color: #f44336;
+    margin-top: 10px;
+  }
+  

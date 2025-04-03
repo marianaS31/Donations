@@ -1,0 +1,75 @@
+<app-navbar></app-navbar>
+
+<h2 class="mb-4">Lista de Doações</h2>
+
+<div class="container mt-4">
+  <div class="search-bar mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Pesquisar por nome da entidade, email do doador, ou data"
+      [(ngModel)]="searchTerm"
+      (input)="filterDonations()"
+    />
+  </div>
+
+  <div *ngIf="filteredDonations.length > 0; else noDonations">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Email do Doador</th>
+          <th>Entidade</th>
+          <th>Detalhes</th>
+          <th>Data</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doacao of filteredDonations; let index = index">
+          <td>{{ index + 1 }}</td>
+          <td>{{ doacao.donorEmail }}</td>
+          <td>{{ doacao.entityName }}</td>
+          <td>
+            <div *ngFor="let donation of doacao.donations; let i = index">
+              <div *ngIf="donation.type === 'money'">
+                Doação {{ i + 1 }}: Quantidade - {{ donation.quantity }}
+              </div>
+              <div *ngIf="donation.type === 'cloth'">
+                Doação {{ i + 1 }}: Peso - {{ donation.kg }} kg, Cor -
+                {{ donation.color }}, Tipo - {{ donation.clothType }}
+              </div>
+              <!-- Formulário de edição de estado -->
+              <select
+                [(ngModel)]="donation.state"
+                (change)="updateState(doacao.entityName, i, donation.state)"
+                class="form-select form-select-sm mt-1"
+              >
+                <option
+                  *ngFor="let state of states"
+                  [value]="state"
+                  [selected]="state === donation.state"
+                >
+                  {{ state }}
+                </option>
+              </select>
+            </div>
+          </td>
+          <td>{{ formatDate(doacao._id) }}</td>
+          <td>
+            <button
+              (click)="deleteDonation(doacao._id)"
+              class="btn btn-danger btn-sm"
+            >
+              Apagar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noDonations>
+    <div class="alert alert-warning" role="alert">Nenhuma doação encontrada.</div>
+  </ng-template>
+</div>

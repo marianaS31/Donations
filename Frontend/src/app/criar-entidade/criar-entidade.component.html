@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+<div>
+  <form [formGroup]="entidadeForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Nome:</label>
+      <input id="name" formControlName="name">
+    </div>
+    <div>
+      <label for="description">Descrição:</label>
+      <input id="description" formControlName="description">
+    </div>
+    <div>
+      <label for="distrito">Distrito:</label>
+      <input id="distrito" formControlName="distrito">
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input id="email" formControlName="email">
+    </div>
+    <div>
+      <label for="password">Senha:</label>
+      <input type="password" id="password" formControlName="password">
+    </div>
+    <div>
+      <label for="image">Imagem:</label>
+      <input type="file" id="image" (change)="onFileChange($event)">
+    </div>
+    <div *ngIf="errorMessages.length">
+      <ul>
+        <li *ngFor="let error of errorMessages">{{ error }}</li>
+      </ul>
+    </div>
+    <div *ngIf="successMessage">
+      <p>{{ successMessage }}</p>
+    </div>
+    <button type="submit">Criar Entidade</button>
+  </form>
+</div>

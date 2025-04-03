@@ -1,0 +1,56 @@
+/* Estilo para o painel de administração */
+.admin-dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Estilo para a lista de entidades pendentes */
+.list-group-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f8f9fa; /* Cor de fundo */
+  border: 1px solid #e2e6ea; /* Cor da borda */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.list-group-item h5 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.list-group-item p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* Estilo para os botões de ação (Aceitar/Rejeitar) */
+.btn-success, .btn-danger {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+/* Estilo para os gráficos */
+.charts-container {
+  margin-top: 30px;
+}
+
+.chart {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.chart h2 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+/* Estilo para o canvas dos gráficos */
+canvas {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
